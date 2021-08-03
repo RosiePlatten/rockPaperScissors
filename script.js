@@ -21,7 +21,7 @@ function computerPlay(){
 function playRound(computerSelection, playerSelection){
     //determines the winner of a round
     //playerSelection is not case sensitive so first we convert to lower case 
-    playerSelection.toLowerCase();
+    playerSelection=playerSelection.toLowerCase();
 
     //then we determine and return the winner
     if(playerSelection == computerSelection){return "Draw";}
@@ -44,12 +44,12 @@ function game(){
         let computerSelection = computerPlay();
         let winner = playRound(computerSelection,playerSelection);
         let output = "Computer Played " + computerSelection +" "+ winner+" Score is now computer ";
-        if(winner == "Player Wins"){playerScore ++;}
-        if(winner == "Computer Wins"){computerScore ++;}
-        output =+ computerScore +" player "+ playerScore;
+        if(winner == "Player Wins"){playerScore++;}
+        if(winner == "Computer Wins"){computerScore++;}
+        output += computerScore +" player "+ playerScore;
         console.log(output);
     }
-    console.log(findWinner());
+    console.log(findWinner(playerScore,computerScore));
 }
 
 function findWinner(playerScore, computerScore){
