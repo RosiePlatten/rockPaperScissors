@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <script src="script.js" defer></script>
+        <link rel="stylesheet" href ='styles.css'>
     </head>
     <body>
-        <script type="text/javascript" src="script.js" >
-        </script>
+        <div id='container'>
+            <h1>Rock - Paper - Scissors</h1>
+            <div id='gameSpace'>
+                <div class='playersNames' id='player-name'>player-name</div>
+                <div class='playersNames'>Computer</div>
+                <div class='scores' id= player-score>0</div>
+                <div class='scores' id= computer-score>1</div>
+                <div class='selection' id='player-selection'></div>
+                <div class ='selection' id = 'computer-selection'></div>
+                <div id='buttons'>
+                    <button type="button" id= 'rock-button'>Rock</button>
+                    <button type='button' id= 'paper-button'>Paper</button>
+                    <button type="button" id='scissors-button'>Scissors</button>
+                </div>
+                <div id='result'>Computer Wins</div>
+
+            </div>
+        </div>
     </body>
 </html>
