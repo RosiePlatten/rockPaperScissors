@@ -1,3 +1,23 @@
+function setup(){
+    playerNameBox= document.querySelector('#player-name');
+    playerScoreBox= document.querySelector('#player-score');
+    computerScoreBox= document.querySelector('#computer-score');
+    playerSelectionBox= document.querySelector('#player-selection');
+    computerSelectionBox= document.querySelector('#computer-selection');
+    resultBox= document.querySelector('#result');
+    rockBtn = document.querySelector("#rock-button");
+    paperBtn = document.querySelector("#paper-button");
+    scissorsBtn = document.querySelector("#scissors-button");
+    rockBtn.addEventListener('click', playRound("rock"));
+    
+    setPlayerName();
+}
+
+function setPlayerName(){
+    let PlayerName = prompt("Please enter your name ");
+    playerNameBox.textContent = PlayerName;
+}
+
 function computerPlay(){
     //generates the computers selection randomly
     //first we generate 0, 1 or 2 randomly
@@ -58,4 +78,6 @@ function findWinner(playerScore, computerScore){
     else{return "computer scored "+ computerScore+" player scored "+ playerScore+" draw!";}
 
 }
+
+setup();
 game();
