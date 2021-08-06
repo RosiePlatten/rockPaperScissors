@@ -4,6 +4,7 @@
     background-color: black;
     color:antiquewhite;
     padding:50px;
+    font-family: Helvetica, sans-serif;
 }
 h1{
     grid-row: 1/2;
