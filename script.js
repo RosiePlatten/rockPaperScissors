@@ -1,4 +1,9 @@
 function setup(){
+    roundCounter=0;
+    playerScore=0;
+    computerScore=0;
+    playerSelection = "";
+    computerSelection="";
     playerNameBox= document.querySelector('#player-name');
     playerScoreBox= document.querySelector('#player-score');
     computerScoreBox= document.querySelector('#computer-score');
@@ -8,9 +13,11 @@ function setup(){
     rockBtn = document.querySelector("#rock-button");
     paperBtn = document.querySelector("#paper-button");
     scissorsBtn = document.querySelector("#scissors-button");
-    rockBtn.addEventListener('click', playRound("rock"));
-    
+    rockBtn.addEventListener('click', function(){playerSelection ="rock";  playRound("rock");});
+    paperBtn.addEventListener('click',function(){playerSelection ="paper";  playRound("paper");});
+    scissorsBtn.addEventListener('click', function(){playerSelection ="scissors";  playRound("scissors");});
     setPlayerName();
+    updateUI();
 }
 
 function setPlayerName(){
@@ -32,52 +39,40 @@ function computerPlay(){
             break;
         case 2:
             return "scissors";
-            break;
-        default:
-            return "Error COMPUTER PLAY";
     }
 }
 
-function playRound(computerSelection, playerSelection){
-    //determines the winner of a round
-    //playerSelection is not case sensitive so first we convert to lower case 
-    playerSelection=playerSelection.toLowerCase();
+function playRound(playerSelection){
+    if(roundCounter<5){
+        roundCounter ++;
+        computerSelection = computerPlay();
+        calculateRoundWinner(playerSelection,computerSelection);
+        console.log(playerScore+computerScore);
+        updateUI();
+    }
+    else if (roundCounter == 5){endGame();}
 
-    //then we determine and return the winner
-    if(playerSelection == computerSelection){return "Draw";}
+}
+
+function calculateRoundWinner(playerSelection,computerSelection){
+    if(playerSelection == computerSelection){}
     else if ((playerSelection == "rock" && computerSelection == "scissors") || (playerSelection =="paper" && computerSelection =="rock") 
-        || (playerSelection == "scissors" && computerSelection =="paper")){return "Player Wins";}
-    else if ((computerSelection =="rock" && playerSelection == "scissors") || (computerSelection =="paper" && playerSelection == "rock") 
-        || (computerSelection == "scissors" && playerSelection =="paper")) {return "Computer Wins";}
-    else{return "Error PLAYROUND";}
-
+        || (playerSelection == "scissors" && computerSelection =="paper")){playerScore=playerScore+1;}
+    else {computerScore=computerScore+ 1;}
 }
 
-function game(){
-    //plays 5 rounds and displays the winner
-    //initialise a score variable
-    let playerScore=0;
-    let computerScore=0;
-    //loop 5 times:
-    for(let i=0; i<5; i++){
-        let playerSelection = prompt("Please enter your play", "ERROR");
-        let computerSelection = computerPlay();
-        let winner = playRound(computerSelection,playerSelection);
-        let output = "Computer Played " + computerSelection +" "+ winner+" Score is now computer ";
-        if(winner == "Player Wins"){playerScore++;}
-        if(winner == "Computer Wins"){computerScore++;}
-        output += computerScore +" player "+ playerScore;
-        console.log(output);
-    }
-    console.log(findWinner(playerScore,computerScore));
+function updateUI(){
+    playerScoreBox.textContent = playerScore;
+    computerScoreBox.textContent = computerScore;
+    playerScoreBox.textContent = playerScore;
+    playerSelectionBox.textContent = playerSelection;
+    computerSelectionBox.textContent = computerSelection;
 }
-
-function findWinner(playerScore, computerScore){
-    if(computerScore > playerScore){ return "computer scored "+ computerScore+" player scored "+ playerScore+" computer wins!";}
-    if(playerScore>computerScore){ return "computer scored "+ computerScore+" player scored "+ playerScore+" player wins!";}
-    else{return "computer scored "+ computerScore+" player scored "+ playerScore+" draw!";}
+function endGame(){
+    if(computerScore > playerScore){ resultBox.textContent = "Computer Won";}
+    if(playerScore>computerScore){  resultBox.textContent = "Player Won";}
+    else{ resultBox.textContent = "Draw";}
 
 }
 
 setup();
-game();
